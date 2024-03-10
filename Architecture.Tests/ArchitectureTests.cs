@@ -16,7 +16,7 @@ public class ArchitectureTests
     {
         this.output = output;
     }
-    
+
     [Fact]
     public void ArchitecturalRules_InCore_AreMet()
     {
@@ -29,10 +29,10 @@ public class ArchitectureTests
                 "Use correct modifiers",
                 "Classes other than '...Query' should not be public"
             );
-      
+
         policy.Evaluate().Report(output);
     }
-    
+
     [Fact]
     public void ArchitecturalRules_InInfrastructure_AreMet()
     {
@@ -43,13 +43,13 @@ public class ArchitectureTests
                     .Should().NotBePublic(),
                 "Use correct modifiers",
                 "Classes in Infrastructure should not be public"
-                )
+            )
             .Add(types => types
                     .That().AreClasses()
                     .Should().NotHaveDependencyOn("Newtonsoft.Json"),
                 "Use only System.Text.Json",
-            "Classes in Infrastructure should not use Newtonsoft");
-      
+                "Classes in Infrastructure should not use Newtonsoft");
+
         policy.Evaluate().Report(output);
     }
 }
